@@ -27,10 +27,10 @@ logger.setLevel(logging.INFO)
 skill_name = "Letter Linker"
 
 starter_text = ("Try and beat your high score of {} points. Say any word that begins with the last letter of my word. My word is, {}.")
-moreTimeText = "If you need more time, say, I need more time"
-noTimeText = " Times up. That's the end of this letter link. If you want to use an extra life to continue, say, use extra life. If you want to play again, say, play letter linker. If you want to exit the game, say, exit game. " 
+moreTimeText = "If you need more time, say 'I need more time'."
+noTimeText = " Times up. That's the end of this letter link. If you want to use an extra life to continue, say 'use extra life'. If you want to play again, say 'play letter linker'. If you want to exit the game, say 'exit game'. " 
 help_text2 = "It's simple! Just say a word that begins with the last letter of my word, which is, {}"
-help_text = ("Letter Linker is simple. Continue the letter link by saying a word that begins with the last letter of my word, and then I will do the same. No repeats are allowed. You'll recieve a score and a linker rank at the end of your link! If you ever want to end the letter link, just say, exit game. Say any word that begins with the last letter of my word. My word is, {}.")
+help_text = ("Letter Linker is simple. Continue the letter link by saying a word that begins with the last letter of my word, and then I will do the same. No repeats are allowed. You'll receive a score and a linker rank at the end of your link! If you ever want to end the letter link, just say, exit game. Say any word that begins with the last letter of my word. My word is, {}.")
 word_slot_key = "currWord"
 word_slot = "currWord"
 
@@ -380,11 +380,11 @@ def select_word_handler(handler_input):
         product = productResponse.in_skill_products[0]
 
         if persAttr["lives"] == 1:
-            speech += " You have {} extra life. If you would like to use one and continue this letter link, say, use a life. If you want to start a new link, say, play letter linker. Otherwise, say, exit game".format(persAttr["lives"])
+            speech += " You have {} extra life. If you would like to use one and continue this letter link, say 'use a life'. If you want to start a new link, say 'play letter linker'. Otherwise, say 'exit game'".format(persAttr["lives"])
         elif persAttr["lives"] > 0:
-            speech += " You have {} extra lives. If you would like to use one and continue this letter link, say, use a life. If you want to start a new link, say, play letter linker. Otherwise, say, exit game".format(persAttr["lives"])
+            speech += " You have {} extra lives. If you would like to use one and continue this letter link, say 'use a life'. If you want to start a new link, say 'play letter linker'. Otherwise, say 'exit game'".format(persAttr["lives"])
         else:
-            speech += " You have no extra lives to use. If you want some extra lives, say, get extra lives. If you want to play again, say, play letter linker. If you want to exit the game, say, exit game."
+            speech += " You have no extra lives to use. If you want some extra lives, say 'get extra lives'. If you want to play again, say 'play letter linker'. If you want to exit the game, say 'exit game'."
 
         handler_input.response_builder.speak(speech).ask(speech)
     else:
@@ -501,7 +501,7 @@ def use_life_intent_handler(handler_input):
         #calling helper
         return continuedGame(handler_input)    
     else:
-        speech = " You have no extra lives to use. If you want some extra lives, say, get extra lives. If you want to play again, say, play letter linker. If you want to exit the game, say, exit game."
+        speech = " You have no extra lives to use. If you want some extra lives, say 'get extra lives'. If you want to play again, say 'play letter linker'. If you want to exit the game, say 'exit game'."
         handler_input.response_builder.speak(speech).ask(speech)
         return handler_input.response_builder.response
     
@@ -534,12 +534,12 @@ def buy_response_handler(handler_input):
                 attr["score"] = persAttr["score"]
                 persAttr["lost"] = False
                 
-                speech += " If you would like to use one and continue this letter link, say, use a life. If you'd like to play a new game, say, play letter linker. If not, say, exit game"
+                speech += " If you would like to use one and continue this letter link, say 'use a life'. If you'd like to play a new game, say 'play letter linker'. If not, say 'exit game'."
                 handler_input.response_builder.speak(speech).ask(speech)
                 handler_input.attributes_manager.save_persistent_attributes()   
                 return handler_input.response_builder.response
             else:
-                speech += " If you would like to play a game, say, play letter linker. If not, say, exit game"
+                speech += " If you would like to play a game, say 'play letter linker'. If not, say 'exit game'."
                 handler_input.response_builder.speak(speech).ask(speech)
                 handler_input.attributes_manager.save_persistent_attributes()   
                 return handler_input.response_builder.response
@@ -548,7 +548,7 @@ def buy_response_handler(handler_input):
                     PurchaseResult.DECLINED.value,
                     PurchaseResult.ERROR.value,
                     PurchaseResult.NOT_ENTITLED.value):
-            speech = "If you'd like to play a new game, say, play letter linker. If you'd like to exit the game, say, exit game."
+            speech = "If you'd like to play a new game, say 'play letter linker'. If you'd like to exit the game, say 'exit game'."
             handler_input.response_builder.speak(speech).ask(speech)
             return handler_input.response_builder.response
 
